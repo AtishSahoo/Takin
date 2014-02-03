@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Varela+Round" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="mycss.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.login-window').click(function() {
+		
+		// Getting the variable's value from a link 
+		var loginBox = $(this).attr('href');
+
+		//Fade in the Popup and add close button
+		$(loginBox).fadeIn(300);
+		
+		//Set the center alignment padding + border
+		var popMargTop = ($(loginBox).height() + 24) / 2; 
+		var popMargLeft = ($(loginBox).width() + 24) / 2; 
+		
+		$(loginBox).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		// Add the mask to body
+		$('body').append('<div id="mask"></div>');
+		$('#mask').fadeIn(300);
+		
+		return false;
+	});
+	
+	// When clicking on the button close or the mask layer the popup closed
+	$('a.close, #mask').live('click', function() { 
+	  $('#mask , .login-popup').fadeOut(300 , function() {
+		$('#mask').remove();  
+	}); 
+	return false;
+	});
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="#"> <%= image_tag "logo.jpg",width: "240px" ,height: "115px"%></a></h1>
+				<p>Template Design by Anupam/Atish</p>
+			</div>
+			<div id="social">
+				<ul class="contact">
+					<li><a href="#"><%=image_tag "fb.jpg" ,width: "20px" ,height: "20px"%></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li><a href="#"><%=image_tag "twitter.jpg" ,width: "20px" ,height: "20px"%></a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="menu" class="container">
+			<ul>
+				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
+				<li><div class="btn-sign">
+<%-# login pop up code starts here -%>				
+				<a href="#login-box" class="login-window">Login / Sign In</a>
+        	</div>
+		
+        <div id="login-box" class="login-popup">
+        <a href="#" class="close"><%= image_tag "close_pop.png", class: "btn_close", title: "Close Window", alt: "Close" %></a>
+							<%= form_tag("login", :method=>"post") do %>                   
+							 <fieldset class="textbox">
+            	 <%= label_tag("username:") %>
+               <%= text_field_tag(:username) %></br>
+							 <%= label_tag(:q, "passwrod:") %>
+               <%= password_field_tag(:password) %></br> 
+								<%=flash[:error]%>
+               <%= submit_tag("sign in", :class=>"submit button") %>
+							<%end%>
+						    <p>
+                <a class="forgot" href="#">Forgot your password?</a>
+                </p>
+                
+                </fieldset>
+          </form>
+
+		</div>
+		<%-# login pop up code ends here -%>
+
+</li>
+				<li><a href="#signup-box" class="login-window">Sign UP</a>
+<%-# sign up popup code start here -%>
+<div id="signup-box" class="signup-popup">
+        <a href="#" class="close"><%= image_tag "close_pop.png", class: "btn_close", title: "Close Window", alt: "Close" %></a>
+							<%= form_tag("signup", :method=>"post") do %>                   
+							 <fieldset class="textbox">
+            	 <%= label_tag("Firstname:") %>
+               <%= text_field_tag(:firstname) %></br>
+							 <%= label_tag("Lastname:") %>
+               <%= text_field_tag(:lastname) %></br> 
+								<%= label_tag("Emailid:") %>
+               <%= text_field_tag(:emailid) %></br>
+							 <%= label_tag("Occupation:") %>
+               <%= text_field_tag(:occupation) %></br> 
+								<%= label_tag("Country:") %>
+               <%= text_field_tag(:country) %></br>
+							 <%= label_tag("State:") %>
+               <%= text_field_tag(:state) %></br> 
+								<%= label_tag("City:") %>
+               <%= text_field_tag(:city) %></br>
+							 <%= label_tag("Address:") %>
+               <%= text_area_tag(:address) %></br> 
+							<%= label_tag("Gender:") %>
+               <%= text_field_tag(:gender) %></br>
+							 <%= label_tag("Date of Birth:") %>
+               <%= text_field_tag(:birthdate) %></br> 
+								<%= label_tag("Phone Number:") %>
+               <%= text_field_tag(:phonenumber) %></br>
+							 <%= submit_tag("sign up", :class=>"submit button") %>
+							<%end%>
+						</fieldset>
+          </form>
+
+		</div>
+		<%-# login pop up code ends here -%>
+				<li><a href="#" accesskey="3" title="">List your space</a></li>
+				<li><a href="#" accesskey="4" title="">Contact Us</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="page" class="container">
+		<div>    <div id="slideshow-wrap">
+        <input type="radio" id="button-1" name="controls" checked="checked"/>
+        <label for="button-1"></label>
+        <input type="radio" id="button-2" name="controls"/>
+        <label for="button-2"></label>
+        <input type="radio" id="button-3" name="controls"/>
+        <label for="button-3"></label>
+        <input type="radio" id="button-4" name="controls"/>
+        <label for="button-4"></label>
+        <input type="radio" id="button-5" name="controls"/>
+        <label for="button-5"></label>
+        <label for="button-1" class="arrows" id="arrow-1">></label>
+        <label for="button-2" class="arrows" id="arrow-2">></label>
+        <label for="button-3" class="arrows" id="arrow-3">></label>
+        <label for="button-4" class="arrows" id="arrow-4">></label>
+        <label for="button-5" class="arrows" id="arrow-5">></label>
+        <div id="slideshow-inner">
+            <ul>
+                <li id="slide1">
+                    <%= image_tag "villa1.jpg",width: "800px" %>
+                    <div class="description">
+                        <input type="checkbox" id="show-description-1"/>
+                        <label for="show-description-1" class="show-description-label">I</label>
+                        <div class="description-text">
+                            <h2>VILLA</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                        </div>
+                    </div>
+                </li>
+                <li id="slide2">
+                    <%= image_tag "villa2.jpg",width: "800px" %>
+                    <div class="description">
+                        <input type="checkbox" id="show-description-2"/>
+                        <label for="show-description-2" class="show-description-label">I</label>
+                        <div class="description-text">
+                            <h2>VILLA</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                        </div>
+                    </div>
+                </li>
+                <li id="slide3">
+                     <%= image_tag "villa3.jpg",width: "800px" %>
+                    <div class="description">
+                        <input type="checkbox" id="show-description-3"/>
+                        <label for="show-description-3" class="show-description-label">I</label>
+                        <div class="description-text">
+                            <h2>VILLA</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                        </div>
+                    </div>
+                </li>
+                <li id="slide4">
+                     <%= image_tag "pic01.jpg",width: "800px" %>
+                    <div class="description">
+                        <input type="checkbox" id="show-description-4"/>
+                        <label for="show-description-4" class="show-description-label">I</label>
+                        <div class="description-text">
+                            <h2>VILLA</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                        </div>
+                    </div>
+                </li>
+                <li id="slide5">
+                     <%= image_tag "pic02.jpg",width: "800px" %>
+                    <div class="description">
+                        <input type="checkbox" id="show-description-5"/>
+                        <label for="show-description-5" class="show-description-label">I</label>
+                        <div class="description-text">
+                            <h2>VILLA</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+		
+	<div id="portfolio-wrapper">
+		<div id="portfolio" class="container">
+			<div class="title">
+				<h2>Neighbourhood Guides</h2>
+				<span class="byline">Not sure where to stay? We've created neighborhood guides for cities all around the world. </span> </div>
+			<div class="column1">
+				<div class="box">
+					<span class="icon icon-cloud-download"></span>
+					<h3>New York</h3>
+					<p>Neighbourhoods</p>
+					<a href="#" class="button"><img src="new york.JPG" width=200px height=150px /></a> </div>
+			</div>
+			<div class="column2">
+				<div class="box">
+					<span class="icon icon-coffee"></span>
+					<h3>London</h3>
+					<p>Neighbourhoods</p>
+					<a href="#" class="button"><img src="london.jpg"  width=200px height=150px /></a> </div>
+			</div>
+			<div class="column3">
+				<div class="box">
+					<span class="icon icon-globe"></span>
+					<h3>Sydney</h3>
+					<p>Neighbourhoods</p>
+					<a href="#" class="button"><img src="sydney.jpg" width=200px height=150px /></a> </div>
+			</div>
+			<div class="column4">
+				<div class="box">
+					<span class="icon icon-dashboard"></span>
+					<h3>Paris</h3>
+					<p>Neighbourhoods</p>
+					<a href="#" class="button"><img src="paris.jpg" width=200px height=150px /></a> </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2013 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>. Photos by <a href="http://fotogrph.com/">Fotogrph</a>.</p>
+</div>
+</body>
+</html>
